@@ -1,0 +1,281 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.rohankanoo.homepage.StudentProfileActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:focusableInTouchMode="true"
+        android:background="@drawable/bg">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="150dp">
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal">
+
+            <TextView
+                android:text="Student Id:"
+                style="@style/tv"/>
+
+            <TextView
+                android:text=""
+                android:id="@+id/vpid"
+                android:gravity="center"
+                style="@style/et"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal">
+
+            <TextView
+                android:text="Name:"
+                style="@style/tv"/>
+
+            <TextView
+                android:text=""
+                android:id="@+id/vpname"
+                android:gravity="center"
+                style="@style/et"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal">
+
+            <TextView
+                android:text="Gender"
+                style="@style/tv"/>
+
+            <TextView
+                android:text="vghvv"
+                android:id="@+id/vpgender"
+                style="@style/et"
+                android:gravity="center"
+                android:focusable="false"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal">
+
+            <TextView
+                android:text="@string/dob"
+                style="@style/tv"/>
+
+            <TextView
+                android:text=""
+                android:id="@+id/vpdob"
+                android:gravity="center"
+                style="@style/et"/>
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal">
+
+            <TextView
+                android:text="@string/sdmsnumber"
+                style="@style/tv"/>
+
+            <TextView
+                android:text=""
+                android:id="@+id/vpsdms"
+                android:gravity="center"
+                style="@style/et"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal">
+
+            <TextView
+                android:text="@string/placement"
+                android:id="@+id/placement"
+                style="@style/tv"/>
+
+            <TextView
+                android:text=""
+                android:id="@+id/vpplacement"
+                style="@style/et"
+                android:gravity="center"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal">
+
+            <TextView
+                android:text="@string/batch"
+                android:id="@+id/batch"
+                style="@style/tv"/>
+
+            <TextView
+                android:text=""
+                android:id="@+id/vpbatch"
+                style="@style/et"
+                android:gravity="center" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal">
+
+            <TextView
+                android:text="@string/ssc"
+                android:id="@+id/ssc"
+                style="@style/tv"/>
+
+            <TextView
+                android:text=""
+                android:id="@+id/vpssc"
+                style="@style/et"
+                android:gravity="center"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical">
+
+            <TextView
+                android:text="@string/address"
+                android:id="@+id/address"
+                style="@style/tv"/>
+
+            <TextView
+                android:text=""
+                android:id="@+id/vpaddress"
+                android:gravity="center"
+                style="@style/et"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal">
+
+            <TextView
+                android:text="@string/pin"
+                android:id="@+id/pin"
+                style="@style/tv"/>
+
+            <TextView
+                android:text=""
+                android:id="@+id/vppin"
+                android:gravity="center"
+                style="@style/et"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal">
+
+            <TextView
+                android:text="@string/aadhar"
+                android:id="@+id/aadhar"
+                style="@style/tv"/>
+
+            <TextView
+                android:text=""
+                android:id="@+id/vpaadhar"
+                android:gravity="center"
+                style="@style/et"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal">
+
+            <TextView
+                android:text="@string/mail"
+                android:id="@+id/mail"
+                style="@style/tv"/>
+
+            <TextView
+                android:text=""
+                android:id="@+id/vpemail"
+                android:gravity="center"
+                style="@style/et" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal">
+
+            <TextView
+                android:text="@string/cnumber"
+                style="@style/tv"/>
+            <TextView
+                android:text=""
+                android:id="@+id/vpcontact"
+                style="@style/et"
+                android:gravity="center"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal">
+
+            <TextView
+                android:text="@string/jrole"
+                style="@style/tv"/>
+            <TextView
+                android:text=""
+                android:id="@+id/vpjrole"
+                style="@style/et"
+                android:gravity="center"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal">
+
+            <TextView
+                android:text="@string/education"
+                android:id="@+id/education"
+                style="@style/tv" />
+            <TextView
+                android:text=""
+                android:id="@+id/vpedulevel"
+                style="@style/et"
+                android:gravity="center"
+                android:focusable="false"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="2"/>
+        </LinearLayout>
+    </LinearLayout>
+</ScrollView>

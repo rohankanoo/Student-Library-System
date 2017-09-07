@@ -1,0 +1,290 @@
+package com.example.rohankanoo.homepage;
+
+import android.app.ProgressDialog;
+import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
+import android.os.Build;
+import android.os.Bundle;
+import android.support.design.widget.TextInputLayout;
+import android.support.v7.app.AlertDialog;
+import android.text.method.HideReturnsTransformationMethod;
+import android.text.method.PasswordTransformationMethod;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.view.Window;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
+import android.widget.EditText;
+import android.widget.Toast;
+
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.HashMap;
+import java.util.Map;
+
+/**
+ * Created by Rohan Kanoo on 30-06-2017.
+ */
+public class EmployeeLoginActivity extends android.support.v4.app.Fragment{
+    Button btn;
+    TextInputLayout usernameWrapper, passwordWrapper;
+    CheckBox cbPassword;
+    EditText password;
+    private ProgressDialog progressDialog;
+    AlertDialog.Builder builder;
+
+    //Overriden method onCreateView
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+
+        //Returning the layout file after inflating
+        //Change R.layout.tab1 in you classes
+        View view = inflater.inflate(R.layout.activity_employee_login, container, false);
+
+        /*if(SharedPrefManager.getInstance(getActivity()).isLoggedIn()){
+            getActivity().finish();
+            startActivity(new Intent(getActivity(),MainActivity.class));
+        }*/
+
+        usernameWrapper = (TextInputLayout) view.findViewById(R.id.usernameWrapper);
+        passwordWrapper = (TextInputLayout) view.findViewById(R.id.passwordWrapper);
+        password = passwordWrapper.getEditText();
+
+        btn = (Button) view.findViewById(R.id.btn);
+
+        progressDialog = new ProgressDialog(getActivity(), R.style.AppCompatAlertDialogStyle);
+        progressDialog.setCancelable(false);
+        progressDialog.setTitle("Please Wait");
+        progressDialog.setMessage("Logging in...");
+
+        usernameWrapper.setHint("Username or ID");
+        passwordWrapper.setHint("Password");
+
+        cbPassword = (CheckBox) view.findViewById(R.id.cbPassword);
+
+        cbPassword.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                // checkbox status is changed from uncheck to checked.
+                if (!isChecked) {
+                    // show password
+                    password.setTransformationMethod(PasswordTransformationMethod.getInstance());
+                } else {
+                    // hide password
+                    password.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+                }
+            }
+        });
+
+        btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                hidekeyboard();
+
+                final String username = usernameWrapper.getEditText().getText().toString().trim();
+                final String password = passwordWrapper.getEditText().getText().toString().trim();
+
+                progressDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#ffffff")));
+                progressDialog.show();
+                Window window = progressDialog.getWindow();
+                window.setLayout(900, 400);
+
+                StringRequest stringRequest = new StringRequest(
+                        Request.Method.POST,
+                        Constants.URL_EMPLOYEE_LOGIN,
+                        new Response.Listener<String>() {
+                            @Override
+                            public void onResponse(String response) {
+                                progressDialog.dismiss();
+                                try {
+                                    JSONObject obj = new JSONObject(response);
+                                    if(!obj.getBoolean("error")){
+                                        SharedPrefManager.getInstance(getActivity())
+                                                .employeeLogin(
+                                                        "0",
+                                                        obj.getString("id"),
+                                                        obj.getString("firstname"),
+                                                        obj.getString("lastname")
+                                                );
+                                        String fname = SharedPrefManager.getInstance(getActivity()).getFirstname();
+                                        String lname = SharedPrefManager.getInstance(getActivity()).getLastname();;
+                                        Toast.makeText(getActivity(), "Hello " + fname + " " + lname, Toast.LENGTH_LONG).show();
+                                        startActivity(new Intent(getActivity(), MainActivity.class));
+                                        getActivity().finish();
+                                    }
+
+                                    else if (username.length() == 0 || password.length() == 0){
+                                        Toast.makeText(getActivity(), "Both field are required", Toast.LENGTH_LONG).show();
+                                    }
+
+                                    else {
+                                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                                            builder = new AlertDialog.Builder(getActivity(), android.R.style.Theme_Material_Dialog_Alert);
+                                        } else {
+                                            builder = new AlertDialog.Builder(getActivity());
+                                        }
+                                        builder.setTitle("Error")
+                                                .setMessage(obj.getString("message"))
+                                                .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                                                    public void onClick(DialogInterface dialog, int which) {
+                                                        // continue with delete
+                                                    }
+                                                })
+                                        /*.setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+                                            public void onClick(DialogInterface dialog, int which) {
+                                                // do nothing
+                                            }
+                                        })*/
+                                                .setIcon(android.R.drawable.ic_dialog_alert)
+                                                .show();
+
+                                        //Toast.makeText(getActivity(), obj.getString("message"), Toast.LENGTH_LONG).show();
+
+                                    }
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+
+                            }
+                        },
+                        new Response.ErrorListener() {
+                            @Override
+                            public void onErrorResponse(VolleyError error) {
+                                progressDialog.dismiss();
+
+                                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                                    builder = new AlertDialog.Builder(getActivity(), android.R.style.Theme_Material_Dialog_Alert);
+                                } else {
+                                    builder = new AlertDialog.Builder(getActivity());
+                                }
+                                builder.setTitle("Error")
+                                        .setMessage(error.getMessage())
+                                        .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                                            public void onClick(DialogInterface dialog, int which) {
+                                                // continue with delete
+                                            }
+                                        })
+                                        /*.setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+                                            public void onClick(DialogInterface dialog, int which) {
+                                                // do nothing
+                                            }
+                                        })*/
+                                        .setIcon(android.R.drawable.ic_dialog_alert)
+                                        .show();
+
+                                //Toast.makeText(getActivity(), error.getMessage(), Toast.LENGTH_LONG).show();
+
+                            }
+                        }
+                ){
+                    @Override
+                    protected Map<String, String> getParams() throws AuthFailureError {
+                        Map<String,String> params = new HashMap<>();
+                        params.put("username",username);
+                        params.put("password",password);
+                        return params;
+                    }
+                };
+
+                RequestHandler.getInstance(getActivity()).addToRequestQueue(stringRequest);
+            }
+        });
+
+        return view;
+    }
+
+    /*void submit(View view) {
+        hidekeyboard();
+
+        final String username = usernameWrapper.getEditText().getText().toString().trim();
+        final String password = passwordWrapper.getEditText().getText().toString().trim();
+
+        progressDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#ffffff")));
+        progressDialog.show();
+        Window window = progressDialog.getWindow();
+        window.setLayout(900, 400);
+
+        StringRequest stringRequest = new StringRequest(
+                Request.Method.POST,
+                Constants.URL_EMPLOYEE_LOGIN,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        progressDialog.dismiss();
+                        try {
+                            JSONObject obj = new JSONObject(response);
+                            if(!obj.getBoolean("error")){
+                                SharedPrefManager.getInstance(getActivity())
+                                        .userLogin(
+                                                obj.getInt("id"),
+                                                obj.getString("username")
+                                        );
+                                startActivity(new Intent(getActivity(), MainActivity.class));
+                                getActivity().finish();
+                            }
+
+                            else if (username.length() == 0 || password.length() == 0){
+                                Toast.makeText(getActivity(), "Both field are required", Toast.LENGTH_LONG).show();
+                            }
+
+                            else {
+                                Toast.makeText(
+                                        getActivity(),
+                                        obj.getString("message"),
+                                        Toast.LENGTH_LONG
+                                ).show();
+
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        progressDialog.dismiss();
+
+                        Toast.makeText(
+                                getActivity(),
+                                error.getMessage(),
+                                Toast.LENGTH_LONG
+                        ).show();
+
+                    }
+                }
+        ){
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String,String> params = new HashMap<>();
+                params.put("username",username);
+                params.put("password",password);
+                return params;
+            }
+        };
+
+        RequestHandler.getInstance(getActivity()).addToRequestQueue(stringRequest);
+    }*/
+
+    void hidekeyboard() {
+        View view = getActivity().getCurrentFocus();
+        if (view != null) {
+            ((InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE)).
+                    hideSoftInputFromWindow(view.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
+        }
+    }
+}

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#ffffff</color>
+    <color name="customColorPrimary">#f5f5f5</color>
+    <color name="customColorPrimaryDark">#757575</color>
+    <color name="customColorAccent">#009688</color>
+    <color name="statusBarColor">#000000</color>
+    <color name="hintColor">#B8B5B5</color>
+    <color name="tabLayoutColor">#881111</color>
+</resources>

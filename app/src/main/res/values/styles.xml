@@ -1,0 +1,79 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    <style name="CustomTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+
+        <item name="colorPrimary">@color/customColorPrimary</item>
+        <item name="colorPrimaryDark">@color/customColorPrimaryDark</item>
+        <item name="colorAccent">@color/customColorAccent</item>
+    </style>
+
+    <style name="SplashTheme" parent="Theme.AppCompat.NoActionBar">
+        <item name="android:windowBackground">@drawable/background_splash</item>
+    </style>
+
+    <style name="AppCompatAlertDialogStyle" parent="Theme.AppCompat.Light.Dialog.Alert">
+        <!--item name="colorPrimary">@color/customColorPrimary</item>
+        <item name="colorPrimaryDark">@color/customColorPrimaryDark</item>
+        <item name="colorAccent">@color/customColorAccent</item-->
+        <item name="colorAccent">#009688</item>
+        <item name="android:textColorPrimary">#000000</item>
+        <item name="android:background">#ffffff</item>
+    </style>
+
+    <style name="datepicker" parent="Theme.AppCompat.Light.Dialog">
+        <item name="colorPrimary">#009688</item>
+        <item name="colorPrimaryDark">#009688</item>
+        <item name="colorAccent">#009688</item>
+    </style>
+
+    <style name="tv">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:typeface">sans</item>
+        <item name="android:shadowDx">1.2</item>
+        <item name="android:shadowDy">1.2</item>
+        <item name="android:shadowRadius">2</item>
+        <item name="android:textColor">#000000</item>
+        <item name="android:gravity" >left</item>
+        <item name="android:layout_margin" >10dp</item>
+        <item name="android:layout_weight" >2.5</item>
+        <item name="android:textSize" >8pt</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:shadowColor" >#FFFFFF</item>
+        <item name="android:padding" >10dp</item>
+    </style>
+
+    <style name="et">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:typeface">sans</item>
+        <item name="android:textColor">#000000</item>
+        <item name="android:gravity" >left</item>
+        <item name="android:layout_margin" >10dp</item>
+        <item name="android:layout_weight" >1.5</item>
+        <item name="android:textSize" >7pt</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:padding" >10dp</item>
+    </style>
+
+    <style name="btn">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:typeface">sans</item>
+        <item name="android:textColor">#000000</item>
+        <item name="android:gravity" >center</item>
+        <item name="android:layout_margin" >10dp</item>
+        <item name="android:textSize" >8pt</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:padding">5dp</item>
+    </style>
+
+</resources>
